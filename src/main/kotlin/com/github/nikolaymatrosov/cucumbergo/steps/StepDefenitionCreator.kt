@@ -10,6 +10,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiTreeUtil
 import org.jetbrains.plugins.cucumber.AbstractStepDefinitionCreator
+import org.jetbrains.plugins.cucumber.CucumberUtil
 import org.jetbrains.plugins.cucumber.psi.GherkinStep
 
 
@@ -38,28 +39,20 @@ class StepDefinitionCreator : AbstractStepDefinitionCreator() {
         val file = runWriteAction { directory.createFile(name) } as GoFile
 
         val newLines = GoElementFactory.createNewLine(file.project, 2)
-        val featureStruct = GoElementFactory.createTypeDeclaration(
-            file.project,
-            "${featureName.capitalize()}Feature", GoElementFactory.createType(
-                file.project,
-                "struct {}",
-                file
-            )
-        )
 
         runWriteAction {
             file.add(GoElementFactory.createFileFromText(file.project, "package steps").getPackage()!!)
             file.add(newLines)
-            file.add(GoElementFactory.createImportDeclaration(file, "testing", "", true))
-            file.add(GoElementFactory.createImportDeclaration(file, "github.com/cucumber/godog", "", true))
-            file.add(newLines)
-            file.add(featureStruct)
+            file.add(GoElementFactory.createImportDeclaration(file, "testing", "", false))
+            file.add(GoElementFactory.createImportDeclaration(file, "context", "", false))
+            file.add(GoElementFactory.createImportDeclaration(file, "github.com/cucumber/godog", "", false))
             file.add(newLines)
             file.add(createTestDefinition(file, featureName))
             file.add(newLines)
             file.add(createInitializeScenario(file, featureName))
         }
 
+        closeActiveTemplateBuilders(file)
         return file
     }
 
@@ -70,17 +63,16 @@ class StepDefinitionCreator : AbstractStepDefinitionCreator() {
 
 
     override fun createStepDefinition(step: GherkinStep, file: PsiFile, withTemlpate: Boolean): Boolean {
-        val stepText = step.substitutedName
+        val stepText = step.name
         val stepName = toLowerCamelCaseName(step.name)
 
         val stepSignature = StringBuilder()
-        stepSignature.append("(")
-
+        stepSignature.append("(ctx context.Context, ")
         for (arg in step.paramsSubstitutions) {
             stepSignature.append(arg)
             stepSignature.append(" string,")
         }
-        stepSignature.append(") error")
+        stepSignature.append(") (context.Context, error)")
         val current = PsiTreeUtil.collectElementsOfType(file, GoFunctionDeclaration::class.java)
             .find {
                 it.name == stepName
@@ -92,7 +84,7 @@ class StepDefinitionCreator : AbstractStepDefinitionCreator() {
                         file.project,
                         stepName,
                         stepSignature.toString(),
-                        "{\nreturn godog.ErrPending\n}",
+                        "{\nreturn ctx, godog.ErrPending\n}",
                         file
                     )
                 )
@@ -108,12 +100,16 @@ class StepDefinitionCreator : AbstractStepDefinitionCreator() {
 
         runWriteAction {
             initializer?.block?.addBefore(
-                GoElementFactory.createStatement(file.project, "ctx.Step(`^$stepText$`, $stepName)"),
+                GoElementFactory.createStatement(
+                    file.project,
+                    "ctx.Step(`^${CucumberUtil.prepareStepRegexp(stepText)}$`, $stepName)"
+                ),
                 initializer.block?.lastChild
             )
         }
 
         file.navigate(true)
+
         return true
     }
 

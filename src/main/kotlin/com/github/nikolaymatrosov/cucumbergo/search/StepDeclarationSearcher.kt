@@ -1,10 +1,10 @@
 package com.github.nikolaymatrosov.cucumbergo.search
 
 import com.github.nikolaymatrosov.cucumbergo.StepDeclaration
+import com.github.nikolaymatrosov.cucumbergo.inReadAction
 import com.goide.psi.GoArgumentList
 import com.goide.psi.GoCallExpr
 import com.intellij.lang.injection.InjectedLanguageManager
-import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.progress.ProgressManager
 import com.intellij.pom.PomDeclarationSearcher
 import com.intellij.pom.PomTarget
@@ -15,14 +15,6 @@ import com.intellij.util.Consumer
 
 
 class StepDeclarationSearcher : PomDeclarationSearcher() {
-
-    fun <T> inReadAction(body: () -> T): T {
-        return ApplicationManager.getApplication().run {
-            if (isReadAccessAllowed) {
-                body()
-            } else runReadAction<T>(body)
-        }
-    }
 
     private fun getStepDeclaration(element: PsiElement, stepName: String): StepDeclaration? {
         return CachedValuesManager.getCachedValue(element) {
@@ -42,7 +34,7 @@ class StepDeclarationSearcher : PomDeclarationSearcher() {
                     var stepName = elem.expressionList.getOrNull(0)?.text
                     if (listOf("Given", "When", "Then", "Step").contains(keyword) && stepName != null) {
                         stepName = stepName.replace("`", "")
-                        getStepDeclaration(candidate, "$keyword $stepName")
+                        getStepDeclaration(candidate, "$stepName")
                     } else {
                         null
                     }

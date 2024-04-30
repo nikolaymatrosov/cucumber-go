@@ -30,7 +30,4 @@
     </extensions>
 
 
-    <applicationListeners>
-        <listener class="com.github.nikolaymatrosov.cucumbergo.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
-    </applicationListeners>
 </idea-plugin>

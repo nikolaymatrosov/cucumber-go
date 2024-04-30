@@ -19,9 +19,6 @@ import org.jetbrains.plugins.cucumber.steps.AbstractCucumberExtension
 import org.jetbrains.plugins.cucumber.steps.AbstractStepDefinition
 import com.github.nikolaymatrosov.cucumbergo.steps.StepDefinitionCreator as GoStepDefinitionCreator
 
-/**
- * @author Taras S.
- */
 class CucumberExtension : AbstractCucumberExtension() {
     override fun isStepLikeFile(child: PsiElement, parent: PsiElement): Boolean {
         return child is GoFile
