@@ -11,10 +11,6 @@ import com.intellij.util.indexing.ID
 import org.jetbrains.plugins.cucumber.CucumberStepIndex
 
 class CucumberStepIndex : CucumberStepIndex() {
-    companion object {
-        val INDEX_ID = ID.create<Boolean, List<Int>>("go.cucumber.step")
-        val PACKAGES = arrayOf("github.com/cucumber/godog")
-    }
 
     override fun getName(): ID<Boolean, List<Int>> {
         return INDEX_ID
@@ -33,11 +29,8 @@ class CucumberStepIndex : CucumberStepIndex() {
     }
 
 
-    /*
-    ctx.Step(`^I should see an error message "([^"]*)" (\d+)$`, iShouldSeeAnErrorMessage)
-     */
     override fun getStepDefinitionOffsets(lighterAst: LighterAST, text: CharSequence): List<Int> {
-        var result = mutableListOf<Int>()
+        val result = mutableListOf<Int>()
 
         val visitor: RecursiveLighterASTNodeWalkingVisitor =
             object : RecursiveLighterASTNodeWalkingVisitor(lighterAst) {
@@ -57,3 +50,6 @@ class CucumberStepIndex : CucumberStepIndex() {
 
 
 }
+
+val INDEX_ID = ID.create<Boolean, List<Int>>("go.cucumber.step")
+val PACKAGES = arrayOf("github.com/cucumber/godog")

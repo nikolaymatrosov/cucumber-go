@@ -8,8 +8,6 @@
     <depends>org.jetbrains.plugins.go</depends>
     <depends>gherkin</depends>
 
-    <resource-bundle>messages.MyBundle</resource-bundle>
-
     <extensions defaultExtensionNs="org.jetbrains.plugins.cucumber.steps">
         <cucumberJvmExtensionPoint implementation="com.github.nikolaymatrosov.cucumbergo.CucumberExtension"/>
     </extensions>
@@ -20,13 +18,11 @@
 
         <pom.declarationSearcher implementation="com.github.nikolaymatrosov.cucumbergo.search.StepDeclarationSearcher"/>
         <referencesSearch implementation="com.github.nikolaymatrosov.cucumbergo.search.StepDefinitionUsageSearcher"/>
-        <findUsagesHandlerFactory implementation="com.github.nikolaymatrosov.cucumbergo.search.StepFindUsagesHandlerFactory"/>
+        <findUsagesHandlerFactory
+                implementation="com.github.nikolaymatrosov.cucumbergo.search.StepFindUsagesHandlerFactory"/>
         <codeInsight.lineMarkerProvider
                 language="go"
                 implementationClass="com.github.nikolaymatrosov.cucumbergo.search.CucumberLineMarkerProvider"/>
-<!--        <languageInjectionContributor-->
-<!--                implementationClass="com.github.nikolaymatrosov.cucumbergo.steps.StepExpressionInjector"-->
-<!--                language="go"/>-->
     </extensions>
 
 

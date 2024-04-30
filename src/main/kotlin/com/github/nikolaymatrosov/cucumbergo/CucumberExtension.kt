@@ -44,7 +44,7 @@ class CucumberExtension : AbstractCucumberExtension() {
             .uniteWith(module.getModuleContentWithDependenciesScope())
         val result = mutableListOf<AbstractStepDefinition>()
 
-        fileBasedIndex.processValues(CucumberStepIndex.INDEX_ID, true, null, { file, value ->
+        fileBasedIndex.processValues(INDEX_ID, true, null, { file, value ->
             ProgressManager.checkCanceled()
             val psiFile = PsiManager.getInstance(project).findFile(file)
             if (psiFile == null) {
