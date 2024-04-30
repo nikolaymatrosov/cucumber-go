@@ -1,7 +1,7 @@
 # cucumber-go
 
 ![Build](https://github.com/nikolaymatrosov/cucumber-go/workflows/Build/badge.svg)
-[![Version](https://img.shields.io/jetbrains/plugin/v/24323-cucumber-go.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
+[![Version](https://img.shields.io/jetbrains/plugin/v/24323-cucumber-go.svg)](https://plugins.jetbrains.com/plugin/24323-cucumber-go)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/24323-cucumber-go.svg)](https://plugins.jetbrains.com/plugin/24323-cucumber-go)
 
 <!-- Plugin description -->
