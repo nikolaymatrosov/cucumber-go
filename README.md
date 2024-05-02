@@ -5,7 +5,7 @@
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/24323-cucumber-go.svg)](https://plugins.jetbrains.com/plugin/24323-cucumber-go)
 
 
-<iframe width="245px" height="48px" src="https://plugins.jetbrains.com/embeddable/install/24323"></iframe>
+<a href="https://plugins.jetbrains.com/plugin/24323-cucumber-go"><img width="245" src="./.github/download.png"></a>
 
 <!-- Plugin description -->
 This plugin provides support for Gherkin language in Go projects.
