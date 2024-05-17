@@ -4,4 +4,8 @@
 
 ## [Unreleased]
 ### Added
-- Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
+- Ability to run tests from feature files
+
+## [0.1.0] - 2024-04-30
+### Added
+- Step Definition Index
