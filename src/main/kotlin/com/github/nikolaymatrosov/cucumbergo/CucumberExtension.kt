@@ -41,7 +41,7 @@ class CucumberExtension : AbstractCucumberExtension() {
         val project = module.project
         val scope = module
             .getModuleWithDependenciesAndLibrariesScope(true)
-            .uniteWith(module.getModuleContentWithDependenciesScope())
+            .uniteWith(module.moduleContentWithDependenciesScope)
         val result = mutableListOf<AbstractStepDefinition>()
 
         fileBasedIndex.processValues(INDEX_ID, true, null, { file, value ->

@@ -11,7 +11,7 @@ import org.jetbrains.plugins.cucumber.CucumberUtil
 
 
 class StepDefinitionUsageSearcher : QueryExecutorBase<PsiReference, SearchParameters>() {
-    fun <T> inReadAction(body: () -> T): T {
+    private fun <T> inReadAction(body: () -> T): T {
         return ApplicationManager.getApplication().run {
             if (isReadAccessAllowed) {
                 body()

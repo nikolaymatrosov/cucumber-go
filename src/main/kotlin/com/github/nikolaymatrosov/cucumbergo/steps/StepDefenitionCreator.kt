@@ -27,7 +27,7 @@ class StepDefinitionCreator : AbstractStepDefinitionCreator() {
         if (featureDir != null) {
             stepsDir = featureDir.findSubdirectory("steps")
             if (stepsDir != null) {
-                return featureFile.getManager().findDirectory(stepsDir.virtualFile)
+                return featureFile.manager.findDirectory(stepsDir.virtualFile)
             }
         }
         return stepsDir
@@ -113,14 +113,14 @@ class StepDefinitionCreator : AbstractStepDefinitionCreator() {
         return true
     }
 
-    fun toLowerCamelCaseName(s: String): String {
+    private fun toLowerCamelCaseName(s: String): String {
         return s.split(" ")
             .map {
                 it.replace("[\"<>.,!]".toRegex(), "")
             }
-            .joinToString("") {
-                it.replaceFirstChar {
-                    it.uppercase()
+            .joinToString("") { s ->
+                s.replaceFirstChar {ch ->
+                    ch.uppercase()
                 }
             }
             .replaceFirstChar { it.lowercase() }
