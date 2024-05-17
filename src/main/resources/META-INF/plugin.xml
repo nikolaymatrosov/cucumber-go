@@ -14,7 +14,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
 
-        <fileBasedIndex implementation="com.github.nikolaymatrosov.cucumbergo.CucumberStepIndex"/>
+        <fileBasedIndex implementation="com.github.nikolaymatrosov.cucumbergo.CucumberGoStepIndex"/>
 
         <pom.declarationSearcher implementation="com.github.nikolaymatrosov.cucumbergo.search.StepDeclarationSearcher"/>
         <referencesSearch implementation="com.github.nikolaymatrosov.cucumbergo.search.StepDefinitionUsageSearcher"/>
@@ -23,6 +23,8 @@
         <codeInsight.lineMarkerProvider
                 language="go"
                 implementationClass="com.github.nikolaymatrosov.cucumbergo.search.CucumberLineMarkerProvider"/>
+        <runConfigurationProducer
+                implementation="com.github.nikolaymatrosov.cucumbergo.run.GodogRunConfigurationProducer"/>
     </extensions>
 
 
