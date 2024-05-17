@@ -10,7 +10,7 @@ import com.intellij.util.indexing.FileBasedIndex
 import com.intellij.util.indexing.ID
 import org.jetbrains.plugins.cucumber.CucumberStepIndex
 
-class CucumberStepIndex : CucumberStepIndex() {
+class CucumberGoStepIndex : CucumberStepIndex() {
 
     override fun getName(): ID<Boolean, List<Int>> {
         return INDEX_ID
@@ -52,4 +52,5 @@ class CucumberStepIndex : CucumberStepIndex() {
 }
 
 val INDEX_ID = ID.create<Boolean, List<Int>>("go.cucumber.step")
-val PACKAGES = arrayOf("github.com/cucumber/godog")
+val GODOG_PACKAGE = "github.com/cucumber/godog"
+val PACKAGES = arrayOf(GODOG_PACKAGE)
