@@ -1,6 +1,7 @@
 package com.github.nikolaymatrosov.cucumbergo
 
 import com.intellij.openapi.application.ApplicationManager
+import kotlin.collections.joinToString
 
 class StepUtils {
     companion object {
@@ -17,4 +18,14 @@ fun <T> inReadAction(body: () -> T): T {
             body()
         } else runReadAction<T>(body)
     }
+}
+
+fun ToCamelCase(s: String): String {
+    return s
+        .split(" ")
+        .joinToString("") { s ->
+            s.replaceFirstChar { ch ->
+                ch.uppercase()
+            }
+        }
 }

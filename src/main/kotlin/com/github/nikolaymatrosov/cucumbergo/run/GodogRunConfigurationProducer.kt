@@ -1,7 +1,7 @@
 package com.github.nikolaymatrosov.cucumbergo.run
 
-import ai.grazie.utils.capitalize
 import com.github.nikolaymatrosov.cucumbergo.CucumberExtension
+import com.github.nikolaymatrosov.cucumbergo.ToCamelCase
 import com.github.nikolaymatrosov.cucumbergo.godog.GodogFramework
 import com.goide.execution.GoBuildingRunConfiguration.Kind
 import com.goide.execution.GoRunUtil
@@ -46,12 +46,12 @@ class GodogRunConfigurationProducer protected constructor() :
                 GherkinScenarioOutline::class.java
             )
 
-            var pattern = "^\\QTest" + file.nameWithoutExtension.capitalize() + "\\E\$"
+            var pattern = "^\\QTest" + ToCamelCase(file.nameWithoutExtension) + "\\E\$"
 
             if (scenario != null) {
-                pattern = pattern + "/^" + scenario.scenarioName + "$"
+                pattern = pattern + "/^" + ToCamelCase(scenario.scenarioName) + "$"
             } else if (scenarioOutline != null) {
-                pattern = pattern + "/^" + scenarioOutline.scenarioName + "(#\\d+)?$"
+                pattern = pattern + "/^" + ToCamelCase(scenarioOutline.scenarioName) + "(#\\d+)?$"
             }
             configuration.pattern = pattern
 
