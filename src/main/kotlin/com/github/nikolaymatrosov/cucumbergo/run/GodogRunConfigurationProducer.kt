@@ -28,7 +28,10 @@ class GodogRunConfigurationProducer protected constructor() :
             val file = element.containingFile.virtualFile
 
             // assuming all steps are in the same directory
-            CucumberExtension().getStepDefinitionContainers(element.containingFile as GherkinFile).first().let {
+            CucumberExtension().getStepDefinitionContainers(element.containingFile as GherkinFile).firstOrNull().let {
+                if (it == null) {
+                    return false
+                }
                 configuration.workingDirectory = it.virtualFile.parent.path
                 configuration.`package` = (it as GoFile).getImportPath(false).toString()
             }
