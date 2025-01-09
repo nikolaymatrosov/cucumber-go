@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+## [0.2.3] - 2025-01-09
+
+- Feat/fix empty list by @nikolaymatrosov in https://github.com/nikolaymatrosov/cucumber-go/pull/82
+
 ## [0.2.2] - 2024-10-20
 
 - Changelog update - `0.2.1` by @github-actions in https://github.com/nikolaymatrosov/cucumber-go/pull/25
@@ -43,7 +47,8 @@
 
 - Step Definition Index
 
-[Unreleased]: https://github.com/nikolaymatrosov/cucumber-go/compare/v0.2.2...HEAD
+[Unreleased]: https://github.com/nikolaymatrosov/cucumber-go/compare/v0.2.3...HEAD
+[0.2.3]: https://github.com/nikolaymatrosov/cucumber-go/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/nikolaymatrosov/cucumber-go/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/nikolaymatrosov/cucumber-go/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/nikolaymatrosov/cucumber-go/compare/v0.1.0...v0.2.0
