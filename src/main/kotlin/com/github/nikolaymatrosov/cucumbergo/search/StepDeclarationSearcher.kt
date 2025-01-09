@@ -46,4 +46,5 @@ class StepDeclarationSearcher : PomDeclarationSearcher() {
             consumer.consume(it)
         }
     }
+
 }

@@ -35,13 +35,22 @@ class CucumberLineMarkerProvider : LineMarkerProvider {
 //    }
 
     override fun getLineMarkerInfo(element: PsiElement): LineMarkerInfo<*>? {
-        if (element !is GoCallExpr) {
+        if (!validCandidate(element)) {
             return null
         }
-        if (element.children.size == 2 && keywords.contains(element.children[0].lastChild.text)) {
-            val stepName = element.children[1].children[0].text.replace("`", "")
-            return LineMarkerInfo(element, element.textRange, Cucumber, { stepName }, null, RIGHT, { stepName })
-        }
-        return null
+        val textElement = element.children[1].children[0]
+        val stepName = textElement.text.replace("`", "")
+        return LineMarkerInfo(
+            textElement.firstChild,
+            textElement.textRange,
+            Cucumber,
+            { stepName },
+            null,
+            RIGHT,
+            { stepName })
+
     }
+
+    private fun validCandidate(element: PsiElement) =
+        element is GoCallExpr && element.children.size == 2 && keywords.contains(element.children[0].lastChild.text)
 }
