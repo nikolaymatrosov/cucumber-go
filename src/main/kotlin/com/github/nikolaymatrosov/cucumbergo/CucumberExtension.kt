@@ -20,12 +20,12 @@ import org.jetbrains.plugins.cucumber.steps.AbstractStepDefinition
 import com.github.nikolaymatrosov.cucumbergo.steps.StepDefinitionCreator as GoStepDefinitionCreator
 
 class CucumberExtension : AbstractCucumberExtension() {
-    override fun isStepLikeFile(child: PsiElement, parent: PsiElement): Boolean {
-        return child is GoFile
+    override fun isStepLikeFile(element: PsiElement): Boolean {
+        return element is GoFile
     }
 
-    override fun isWritableStepLikeFile(child: PsiElement, parent: PsiElement): Boolean {
-        return (child as? GoFile)?.containingFile?.virtualFile?.isWritable ?: false
+    override fun isWritableStepLikeFile(element: PsiElement): Boolean {
+        return (element as? GoFile)?.containingFile?.virtualFile?.isWritable ?: false
     }
 
     override fun getStepFileType(): BDDFrameworkType {
@@ -36,7 +36,7 @@ class CucumberExtension : AbstractCucumberExtension() {
         return GoStepDefinitionCreator()
     }
 
-    override fun loadStepsFor(featureFile: PsiFile?, module: Module): List<AbstractStepDefinition> {
+    override fun loadStepsFor(module: Module): List<AbstractStepDefinition> {
         val fileBasedIndex = FileBasedIndex.getInstance()
         val project = module.project
         val scope = module
@@ -66,12 +66,10 @@ class CucumberExtension : AbstractCucumberExtension() {
 
     override fun getStepDefinitionContainers(featureFile: GherkinFile): Collection<PsiFile> {
         val module = ModuleUtilCore.findModuleForPsiElement(featureFile)
-        val steps = module?.let {
-            loadStepsFor(featureFile, it)
-        }
+        val steps = module?.let(::loadStepsFor)
         val psiFiles = steps
             ?.map { it.element?.containingFile }
-            ?.filter { isWritableStepLikeFile(it!!, it.parent!!) }
+            ?.filter { isWritableStepLikeFile(it!!) }
             ?.filterNotNull()
             ?: emptyList()
         return psiFiles

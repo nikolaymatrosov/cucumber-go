@@ -1,4 +1,9 @@
 .gradle
 .idea
 .qodana
+.kotlin
+.intellijPlatform/layoutIndex
+.intellijPlatform/localPlatformArtifacts
+.intellijPlatform/productReleases
+.intellijPlatform/sandbox
 build
