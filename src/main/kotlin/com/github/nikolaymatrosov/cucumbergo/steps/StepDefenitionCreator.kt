@@ -1,6 +1,5 @@
 package com.github.nikolaymatrosov.cucumbergo.steps
 
-import ai.grazie.utils.capitalize
 import com.goide.psi.GoFile
 import com.goide.psi.GoFunctionDeclaration
 import com.goide.psi.impl.GoElementFactory
@@ -129,7 +128,7 @@ class StepDefinitionCreator : AbstractStepDefinitionCreator() {
     private fun createTestDefinition(file: PsiFile, featureName: String): PsiElement {
         return GoElementFactory.createFunctionDeclaration(
             file.project,
-            "Test${featureName.capitalize()}",
+            "Test${featureName.replaceFirstChar { it.uppercase() }}",
             "(t *testing.T)",
             """
                 {
@@ -166,6 +165,6 @@ class StepDefinitionCreator : AbstractStepDefinitionCreator() {
     }
 
     private fun scenarioInitailizerName(featureName: String): String {
-        return "Initialize${featureName.capitalize()}Scenario"
+        return "Initialize${featureName.replaceFirstChar { it.uppercase() }}Scenario"
     }
 }
