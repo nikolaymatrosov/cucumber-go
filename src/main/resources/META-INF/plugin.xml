@@ -5,7 +5,6 @@
     <vendor>nikolaymatrosov</vendor>
 
     <depends>com.intellij.modules.platform</depends>
-    <depends>intellij.testRunner.plugin</depends>
     <depends>org.jetbrains.plugins.go</depends>
     <depends>gherkin</depends>
 

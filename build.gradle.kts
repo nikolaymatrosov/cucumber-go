@@ -33,11 +33,10 @@ dependencies {
     intellijPlatform {
         goland(properties("platformVersion").get())
         bundledPlugin("org.jetbrains.plugins.go")
-        bundledPlugin("intellij.testRunner.plugin")
-        plugin("gherkin", "262.8665.173")
+        plugin("gherkin", "253.28294.218")
     }
 
-    testImplementation("com.jetbrains.intellij.go:go-test-framework:262.8665.270") {
+    testImplementation("com.jetbrains.intellij.go:go-test-framework:253.33813.35") {
         exclude("org.jetbrains.kotlin", "kotlin-stdlib-jdk8")
         exclude("org.jetbrains.kotlin", "kotlin-reflect")
         exclude("com.jetbrains.rd", "rd-core")
