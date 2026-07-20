@@ -20,7 +20,7 @@ class StepDefinition(callExpr: GoCallExpr) : AbstractStepDefinition(callExpr) {
         return listOf()
     }
 
-    override fun getCucumberRegexFromElement(element: PsiElement): String? {
+    override fun getCucumberRegexFromElement(element: PsiElement?): String? {
 
         val text = getStepDefinitionText() ?: return null
         if (text.startsWith(REGEX_START) || text.endsWith(REGEX_END)) {
